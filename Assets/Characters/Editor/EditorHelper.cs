@@ -34,8 +34,6 @@ public class EditorHelper : MonoBehaviour
 
             int numCols = spriteSheet.width / sliceWidth;
             int numRows = spriteSheet.height / sliceHeight;
-            int row = numRows - 1;
-            int col = 0;
             Debug.Log("Num Rows = " + numRows);
             Debug.Log("Num Cols = " + numCols);
             for (int i = 0; i < spriteSheet.width; i += sliceWidth)
@@ -45,20 +43,18 @@ public class EditorHelper : MonoBehaviour
                     SpriteMetaData smd = new SpriteMetaData();
                     smd.pivot = new Vector2(0.5f, 0.5f);
                     smd.alignment = 9;
-                    //smd.name = (spriteSheet.height - j) / sliceHeight + ", " + i / sliceWidth;
+                    int row = (spriteSheet.height - j) / sliceHeight;
+                    int col = i / sliceWidth;
+                    //smd.name = (spriteSheet.height - j) / sliceHeight + ", " + ;
                     Debug.Log("Row = " + row);
                     Debug.Log("Col = " + col);
                     int index = (row * numCols) + col;
                     Debug.Log("Index = " + index);
-                    smd.name = spriteSheet.name + "_" + index;
+                    smd.name = spriteSheet.name + "_" + (row * numCols + col);
                     smd.rect = new Rect(i, j - sliceHeight, sliceWidth, sliceHeight);
 
                     newData.Add(smd);
-
-                    row -= 1;
                 }
-                row = numRows - 1;
-                col += 1;
             }
 
             ti.spritesheet = newData.ToArray();
