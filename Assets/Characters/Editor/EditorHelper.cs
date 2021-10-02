@@ -14,7 +14,7 @@ public class EditorHelper : MonoBehaviour
 
         // Change the below for the path to the folder containing the sprite sheets (warning: not tested on folders containing anything other than just spritesheets!)
         // Ensure the folder is within 'Assets/Resources/' (the below example folder's full path within the project is 'Assets/Resources/ToSlice')
-        string folderPath = "Spritesheets/Hair";
+        string folderPath = "Spritesheets/Eyes/Lipstick";
 
         Object[] spriteSheets = Resources.LoadAll(folderPath, typeof(Texture2D));
         Debug.Log("spriteSheets.Length: " + spriteSheets.Length);
