@@ -18,7 +18,7 @@ TagManager:
   - 
   - 
   - Player
-  - 
+  - PlayerBlock
   - 
   - 
   - 
@@ -43,6 +43,15 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: Furniture
+    uniqueID: 3693019997
+    locked: 0
+  - name: Decoration
+    uniqueID: 1547720207
+    locked: 0
   - name: Player
     uniqueID: 475702585
+    locked: 0
+  - name: WallTop
+    uniqueID: 2960456405
     locked: 0

@@ -6,32 +6,40 @@ public class PlayerMovement : MonoBehaviour
 {
     public float moveSpeed = 5.0f;
     public Rigidbody2D rb;
-    public Animator animator;
+    private Animator[] _animators;
 
-    Vector2 movement;
-    
+    Vector2 _movement;
+
+    private void Start()
+    {
+        _animators = GetComponentsInChildren<Animator>();
+    }
+
     void Update()
     {
         // Input   
-        movement.x = Input.GetAxisRaw("Horizontal");
-        movement.y = Input.GetAxisRaw("Vertical");
+        _movement.x = Input.GetAxisRaw("Horizontal");
+        _movement.y = Input.GetAxisRaw("Vertical");
 
-        movement = Vector2.ClampMagnitude(movement, 1.0f);
+        _movement = Vector2.ClampMagnitude(_movement, 1.0f);
 
-        animator.SetFloat("Horizontal", movement.x);
-        animator.SetFloat("Vertical", movement.y);
-        animator.SetFloat("Speed", movement.sqrMagnitude);
-        
-        if (movement.sqrMagnitude > 0.01)
+        foreach (var animator in _animators)
         {
-            animator.SetFloat("Horizontal_Facing", movement.x);
-            animator.SetFloat("Vertical_Facing", movement.y);
+            animator.SetFloat("Horizontal", _movement.x);
+            animator.SetFloat("Vertical", _movement.y);
+            animator.SetFloat("Speed", _movement.sqrMagnitude);
+
+            if (_movement.sqrMagnitude > 0.01)
+            {
+                animator.SetFloat("Horizontal_Facing", _movement.x);
+                animator.SetFloat("Vertical_Facing", _movement.y);
+            }
         }
     }
 
     void FixedUpdate()
     {
         // Movement
-        rb.MovePosition(rb.position + (movement * moveSpeed * Time.fixedDeltaTime));
+        rb.MovePosition(rb.position + (_movement * moveSpeed * Time.fixedDeltaTime));
     }
 }
