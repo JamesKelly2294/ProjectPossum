@@ -4,9 +4,15 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    public float moveSpeed = 5.0f;
+    public float walkSpeed = 5.0f;
+    public float runSpeed = 5.0f;
+
+    [Range(0.1f, 5.0f)]
+    public float footstepThreshhold = 1.0f;
+    public bool isRunning = false;
     public Rigidbody2D rb;
     private Animator[] _animators;
+    private Vector2 _prevPosition;
 
     Vector2 _movement;
 
@@ -15,8 +21,12 @@ public class PlayerMovement : MonoBehaviour
         _animators = GetComponentsInChildren<Animator>();
     }
 
+    float distanceSinceLastFootstep;
+
     void Update()
     {
+        isRunning = Input.GetKey(KeyCode.LeftShift);
+
         // Input   
         _movement.x = Input.GetAxisRaw("Horizontal");
         _movement.y = Input.GetAxisRaw("Vertical");
@@ -28,6 +38,7 @@ public class PlayerMovement : MonoBehaviour
             animator.SetFloat("Horizontal", _movement.x);
             animator.SetFloat("Vertical", _movement.y);
             animator.SetFloat("Speed", _movement.sqrMagnitude);
+            animator.SetFloat("AnimationSpeed", isRunning ? 1.5f : 0.8f);
 
             if (_movement.sqrMagnitude > 0.01)
             {
@@ -40,6 +51,17 @@ public class PlayerMovement : MonoBehaviour
     void FixedUpdate()
     {
         // Movement
-        rb.MovePosition(rb.position + (_movement * moveSpeed * Time.fixedDeltaTime));
+        rb.MovePosition(rb.position + (_movement * (isRunning ? runSpeed : walkSpeed) * Time.fixedDeltaTime));
+        distanceSinceLastFootstep += (Vector2.Distance(_prevPosition, rb.position));
+
+        Debug.Log("distanceSinceLastFootstep = " + distanceSinceLastFootstep);
+
+        if (isRunning && distanceSinceLastFootstep > footstepThreshhold)
+        {
+            AudioManager.Instance.Play("Player/Walk", false, 0.7f, 1.35f, 0.05f, 0.1f);
+            distanceSinceLastFootstep = 0.0f;
+        }
+
+        _prevPosition = rb.position;
     }
 }

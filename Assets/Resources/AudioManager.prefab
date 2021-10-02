@@ -123,8 +123,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mixer: {fileID: 24100000, guid: a0420a807fa813e4cb71d6b63902ac1c, type: 2}
-  audioSourcePrefab: {fileID: 5304750828136170511, guid: fe776b46bbb1158408005f95954f2ffc,
-    type: 3}
+  audioSourcePrefab: {fileID: 5304750828136170511, guid: fe776b46bbb1158408005f95954f2ffc, type: 3}
 --- !u!1 &700154186250235073
 GameObject:
   m_ObjectHideFlags: 0
@@ -178,6 +177,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: ea5786a091fcb4a4e9a91d603d544097, type: 2}
   - {fileID: 11400000, guid: e9f98c6e3b2da64409a40de9a9a9f190, type: 2}
   - {fileID: 11400000, guid: dbb3ce75953dd7c4ca20528ae7f2a895, type: 2}
+  - {fileID: 11400000, guid: 50175b70ccaa51b4eae2789bfccfaca7, type: 2}
 --- !u!1 &4495126892458148760
 GameObject:
   m_ObjectHideFlags: 0
