@@ -10,6 +10,8 @@ public class CharacterDialog : MonoBehaviour
         get; private set;
     }
 
+    public bool DebugHideUI = false;
+
     public FinalizedDialogScript ActiveScript;
     public int ActiveScriptIndex = 0;
 
@@ -50,7 +52,13 @@ public class CharacterDialog : MonoBehaviour
 
         ActiveScriptIndex += 1;
 
-        AudioManager.Instance.Play("Dialog/Enter", false, 0.8f, 1.4f, 1.2f, 1.1f);
+        if (DebugHideUI)
+        {
+            DisplayNextScriptLine();
+        } else
+        {
+            AudioManager.Instance.Play("Dialog/Enter", false, 0.8f, 1.4f, 1.2f, 1.1f);
+        }
     }
 
     public void FinishScript()
