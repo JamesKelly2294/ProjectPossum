@@ -3,10 +3,21 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public interface IInventoryItem
+public class InventoryItem: MonoBehaviour
 {
-    public GameObject Item { get; set; }
+    public PubSubSender sender;
+
+    public BaseItem Item { get; set; }
     public int Quantity { get; set; }
+
+    public void HandleClick(PubSubListenerEvent e)
+    {
+        if (Item.IsSelectable())
+        {
+            var view = e.sender.GetComponent<InventoryItemUI>();
+            view.ToggleSelection();
+        }
+    }
 }
 
 /**
@@ -14,23 +25,23 @@ public interface IInventoryItem
  * - Item selection/deselection (on click in UI)
  * - Item highlighting (Prompted when inventory is open and the user is near a table/bench etc, or if some other UI element needs to hint to the player that they can make stuff)
  * - Toggling Inventory visibility
- * 
+ * - Use/Drop
  */
 public class PlayerInventory : MonoBehaviour
 {
-    public IEnumerable<IInventoryItem> Items;
-    private IEnumerable<int> selectedItemIndices;
+    public IEnumerable<InventoryItem> Items;
     
-    public int UsableInventorySlots = 40;
-    public int InventorySlotsVerticalCount = 8;
-    public int InventorySlotsHorizontalCount = 5;
+    public int UsableInventorySlots = 18;
 
     public InventoryUI View;
 
+    public PubSubManager eventManager;
+    public PubSubListener listener;
+
     public void Start()
     {
-        if (Items == null) { Items = new List<IInventoryItem>(); }
-        if (selectedItemIndices == null) { selectedItemIndices = new List<int>(); } 
+        if (Items == null) { Items = new List<InventoryItem>(); }
+        //if (selectedItemIndices == null) { selectedItemIndices = new List<int>(); } 
     }
 
     public void Update()
@@ -38,27 +49,27 @@ public class PlayerInventory : MonoBehaviour
         
     }
 
-    public void SelectItems(IEnumerable<Vector2> atInventoryIndex)
+    public void SelectItems(IEnumerable<int> atInventoryIndex)
     {
         throw new NotImplementedException();
     }
 
-    public void DeselectItems(IEnumerable<Vector2> atInventoryIndex)
+    public void DeselectItems(IEnumerable<int> atInventoryIndex)
     {
         throw new NotImplementedException();
     }
 
-    public void HighlightItem(Vector2 atInventoryIndex, Color suggestedHighlightColor)
+    public void HighlightItem(int atInventoryIndex, Color suggestedHighlightColor)
     {
         throw new NotImplementedException();
     }
 
-    public void UnhighlightItem(Vector2 atInventoryIndex)
+    public void UnhighlightItem(int atInventoryIndex)
     {
         throw new NotImplementedException();
     }
 
-    private IEnumerable<Vector2> FindItemIndices(IInventoryItem item)
+    private IEnumerable<int> FindItemIndices(BaseItem item)
     {
         throw new NotImplementedException();
     }
