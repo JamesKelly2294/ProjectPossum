@@ -1,0 +1,63 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a20412c1d6df25b4fa4a562fec2c4d69, type: 3}
+  m_Name: ReturnToApothecary
+  m_EditorClassIdentifier: 
+  title: 
+  events:
+  - scriptIndex: 4
+    eventName: returned-to-apothecary
+  script:
+  - speaker: 1
+    dialog: Hey Boss.
+  - speaker: 0
+    dialog: What do you want?
+  - speaker: 1
+    dialog: ...
+  - speaker: 1
+    dialog: You told me to come back once I settled in.
+  - speaker: 0
+    dialog: Oh, right.
+  - speaker: 0
+    dialog: Let's start off simple. Mix together some <color=yellow>Golden Rod Salve</color>
+      for me.
+  - speaker: 0
+    dialog: Oh, and I almost forgot! <color=yellow>We don't have any herbs or reagents
+      on hand</color>.
+  - speaker: 1
+    dialog: <color=red>*P A N I K*
+  - speaker: 0
+    dialog: Yeah, you'll need to grow those yourself. Thankfully I got myself an
+      enchanted farm. <color=yellow>Crops grow much faster here, so long as they're
+      positioned well</color>.
+  - speaker: 0
+    dialog: 'Here, take these seeds. We''ve got plenty, so <color=yellow>don''t worry
+      about running out</color>. '
+  - speaker: 0
+    dialog: And don't forget - I need you to mix together some <color=yellow>Golden
+      Rod Salve</color> for me as fast as possible. I've got an experiment here that
+      can't wait.
+  - speaker: 1
+    dialog: '*to self* What the <color=red>hell</color> is <color=yellow>Golden Rod
+      Salve</color>?'
+  - speaker: 2
+    dialog: Hey, don't take the name of my realm in vain. I thought you were cool.
+  - speaker: 1
+    dialog: Huh!?! How are you talking to me?
+  - speaker: 2
+    dialog: Focus. And clean up your attitude.
+  - speaker: 1
+    dialog: Sorry.
+  - speaker: 2
+    dialog: You should be.
+  - speaker: 2
+    dialog: Now get back here and I'll show you how to do your job.

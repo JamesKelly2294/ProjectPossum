@@ -30,10 +30,14 @@ MonoBehaviour:
   - speaker: 0
     dialog: After all, I'm not not paying you to dilly dally. Get to work! <color=yellow>The
       farm is out back</color>.
+  - speaker: 0
+    dialog: Once you've familiarized yourself with the farm, I'll give you your first
+      task.
   - speaker: 1
     dialog: O-of... of course! *internal screaming*
   - speaker: 1
     dialog: '*to self* Oh geez... I really shouldn''t have lied on my application.
       I''m in way over my head.'
   - speaker: 1
-    dialog: Oh well... Guess I should head to <color=yellow>the farm out back</color>.
+    dialog: '*to self* Oh well... Guess I should head to <color=yellow>the farm out
+      back</color>.'

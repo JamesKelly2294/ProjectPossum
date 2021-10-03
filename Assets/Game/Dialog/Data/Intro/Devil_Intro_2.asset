@@ -16,6 +16,8 @@ MonoBehaviour:
   events:
   - scriptIndex: 35
     eventName: introduce-devil-reputation
+  - scriptIndex: 41
+    eventName: introduce-return-to-apothecary
   script:
   - speaker: 0
     dialog: ...Uhh... hello?

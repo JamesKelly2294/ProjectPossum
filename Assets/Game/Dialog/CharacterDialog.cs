@@ -128,7 +128,7 @@ public class CharacterDialog : MonoBehaviour
         if (ActiveScript != null)
         {
             SpeakerCam.transform.position = new Vector3(CameraTarget.transform.position.x,
-                CameraTarget.transform.position.y, SpeakerCam.transform.position.z);
+                CameraTarget.transform.position.y - 0.25f, SpeakerCam.transform.position.z);
 
             CharacterDialogArrow.position = new Vector2(CharacterDialogArrow.position.x,
                 _characterDialogArrowStartingY + (Mathf.Sin(Time.time * CharacterDialogArrowSpeed) * CharacterDialogArrowDistance) + CharacterDialogArrowDistance / 2.0f);

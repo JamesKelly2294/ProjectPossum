@@ -46,4 +46,14 @@ public class ObjectiveTracker : MonoBehaviour
     {
         ShowObjective("Investigate the individual behind the farm.");
     }
+
+    public void ShowReturnToApothecaryObjective()
+    {
+        ShowObjective("Let the Apothecary know you've settled in.");
+    }
+
+    public void ShowReturnToDevilObjective()
+    {
+        ShowObjective("Return to the Devil, and learn how to do your job.");
+    }
 }

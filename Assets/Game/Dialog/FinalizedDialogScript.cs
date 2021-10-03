@@ -19,8 +19,8 @@ public class FinalizedDialogScript : MonoBehaviour
     public bool IsBeingPlayed;
     public bool CompletedOnce;
 
-    public UnityEvent OnScriptFinished;
     public UnityEvent OnScriptBegan;
+    public UnityEvent OnScriptFinished;
     public List<DialogUnityEvent> DialogEvents;
 
     public string Title
