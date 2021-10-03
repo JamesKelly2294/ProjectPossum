@@ -27,7 +27,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1645068743973289829}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 4.0200005, y: -0.7600002, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -433,7 +433,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b6266032cc03f274cb11514cab0a20f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spriteSheetName: Spritesheets/Characters/char3_animation
+  spriteSheetName: Spritesheets/Characters/char4_animation
 --- !u!95 &1645068744684546063
 Animator:
   serializedVersion: 3
@@ -716,7 +716,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b6266032cc03f274cb11514cab0a20f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spriteSheetName: Spritesheets/Eyes/Blush/blush1
+  spriteSheetName: Spritesheets/Eyes/Blush/blush4
 --- !u!95 &1645068744945590374
 Animator:
   serializedVersion: 3
@@ -1183,7 +1183,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b6266032cc03f274cb11514cab0a20f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spriteSheetName: Spritesheets/Eyes/Lipstick/lipstick1
+  spriteSheetName: Spritesheets/Eyes/Lipstick/lipstick4
 --- !u!95 &1645068745592330662
 Animator:
   serializedVersion: 3
