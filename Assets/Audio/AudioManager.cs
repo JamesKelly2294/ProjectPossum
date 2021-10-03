@@ -106,7 +106,7 @@ public class AudioManager : MonoBehaviour
 
         audioSource.pitch = Random.Range(pitchMin, pitchMax);
         audioSource.volume = Random.Range(volumeMin, volumeMax);
-        audioSource.clip = soundInfo.audioClips[Random.Range(0, soundInfo.audioClips.Length - 1)];
+        audioSource.clip = soundInfo.audioClips[Random.Range(0, soundInfo.audioClips.Length)];
         audioSource.outputAudioMixerGroup = soundInfo.audioMixerGroup;
         audioSource.loop = loop;
         audioSource.Play();
@@ -154,7 +154,7 @@ public class AudioManager : MonoBehaviour
     private void Start()
     {
         InitializeVolumes();
-        Play("Ambiance/Background", true, volumeMin: 0.25f, volumeMax: 0.25f);
+        Play("Ambiance/Background", true, volumeMin: 0.75f, volumeMax: 0.75f);
         Play("Music/Background", true, volumeMin: 0.5f, volumeMax: 0.5f, isMusic: true);
     }
 

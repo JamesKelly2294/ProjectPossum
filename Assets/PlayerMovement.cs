@@ -58,7 +58,7 @@ public class PlayerMovement : MonoBehaviour
 
         if (isRunning && distanceSinceLastFootstep > footstepThreshhold)
         {
-            AudioManager.Instance.Play("Player/Walk", false, 0.7f, 1.35f, 0.05f, 0.1f);
+            AudioManager.Instance.Play("Player/Walk", false, 0.7f, 1.35f, 0.25f, 0.3f);
             distanceSinceLastFootstep = 0.0f;
         }
 
