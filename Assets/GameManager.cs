@@ -64,8 +64,8 @@ public class GameManager : MonoBehaviour
 
         StartCoroutine(GetSceneLoadProgress());
     }
-
-    public IEnumerator GetSceneLoadProgress()
+    
+    public IEnumerator GetSceneLoadProgress(bool extendLoadingTime = false)
     {
         foreach(var sceneLoad in scenesLoading)
         {
