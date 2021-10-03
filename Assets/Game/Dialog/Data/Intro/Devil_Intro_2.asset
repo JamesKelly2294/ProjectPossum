@@ -1,0 +1,116 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a20412c1d6df25b4fa4a562fec2c4d69, type: 3}
+  m_Name: Devil_Intro_2
+  m_EditorClassIdentifier: 
+  title: 
+  events:
+  - scriptIndex: 35
+    eventName: introduce-devil-reputation
+  script:
+  - speaker: 0
+    dialog: ...Uhh... hello?
+  - speaker: 1
+    dialog: ...
+  - speaker: 0
+    dialog: ...
+  - speaker: 0
+    dialog: Hey.
+  - speaker: 0
+    dialog: You, with the horns.
+  - speaker: 1
+    dialog: '!?!'
+  - speaker: 1
+    dialog: You can see me!?!
+  - speaker: 0
+    dialog: ...Yes?
+  - speaker: 0
+    dialog: What are you doing? Why are you just... standing there?
+  - speaker: 1
+    dialog: '!'
+  - speaker: 1
+    dialog: Nevermind that!
+  - speaker: 1
+    dialog: '*ahem*'
+  - speaker: 1
+    dialog: <color=red>TREMBLE MORTALS AND DESPAIR, DOOM HAS COME TO THIS WORLD!
+  - speaker: 0
+    dialog: ...
+  - speaker: 0
+    dialog: Cool.
+  - speaker: 0
+    dialog: Anyway, could you just not today? I already have enough to deal with.
+  - speaker: 1
+    dialog: Aww, what's the matter buddy? Wanna tell me about it?
+  - speaker: 0
+    dialog: 'I bullshitted my way into this intership with the Apothecary and I have
+      no idea what I''m doing. '
+  - speaker: 1
+    dialog: Dude, that's not cool.
+  - speaker: 0
+    dialog: I had a good reason! I really needed the money.
+  - speaker: 0
+    dialog: How else would I be able to feed my candle addiction?
+  - speaker: 1
+    dialog: 'Well questionable ethics aside, today''s your lucky day! '
+  - speaker: 1
+    dialog: I happen to be in the business of helping people like you.
+  - speaker: 1
+    dialog: For a small fee of course...
+  - speaker: 1
+    dialog: Just blindly sign this contract on the red dotted line, and I'll help
+      you with your internship!
+  - speaker: 0
+    dialog: ...
+  - speaker: 0
+    dialog: What could possibly go wrong? You've got a deal!
+  - speaker: 0
+    dialog: '*signs the contract*'
+  - speaker: 1
+    dialog: Fantastic! You've got yourself one genu-ine, bonafide, electrified Deal
+      With The Devil.
+  - speaker: 0
+    dialog: Deal with the wh-
+  - speaker: 1
+    dialog: Now, let's get started. You see that <color=yellow>blue bar in the top
+      right of the screen</color>? The one with the Apothecary's face?
+  - speaker: 1
+    dialog: That bar represents what the Apothecary thinks of you. Folks 'round here
+      call it a <color=yellow>Reputation Bar</color>. Keep him happy, it'll fill
+      up.
+  - speaker: 1
+    dialog: Fail his tasks, however, and you'll lose reputation. <color=yellow>Lose
+      enough reputation, and you're fired</color>! No candles for you!
+  - speaker: 0
+    dialog: What a nightmare...
+  - speaker: 1
+    dialog: So yeah, keep him happy. Oh, wanna see something cool?
+  - speaker: 1
+    dialog: <color=red>*poof*
+  - speaker: 1
+    dialog: I've got a bar too!
+  - speaker: 1
+    dialog: Piss me off, and I'll drag you back to Hell with me.
+  - speaker: 1
+    dialog: But you seem chill. I'm sure that won't happen.
+  - speaker: 1
+    dialog: Probably.
+  - speaker: 0
+    dialog: Wonderful.
+  - speaker: 1
+    dialog: I know, right!?! Now, <color=yellow>return to the Apothecary</color>
+      and tell him you've settled in. He'll give you your first task.
+  - speaker: 1
+    dialog: I'll help you out once you come back here. Oh and don't forget, <color=yellow>you
+      can run by holding the shift key</color>.
+  - speaker: 0
+    dialog: Ugh.

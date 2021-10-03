@@ -1,7 +1,15 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+
+[Serializable]
+public class DialogUnityEvent
+{
+    public string dialogEventName;
+    public UnityEvent unityEvent;
+}
 
 public class FinalizedDialogScript : MonoBehaviour
 {
@@ -13,6 +21,7 @@ public class FinalizedDialogScript : MonoBehaviour
 
     public UnityEvent OnScriptFinished;
     public UnityEvent OnScriptBegan;
+    public List<DialogUnityEvent> DialogEvents;
 
     public string Title
     {

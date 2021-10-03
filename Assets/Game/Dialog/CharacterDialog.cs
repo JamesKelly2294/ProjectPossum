@@ -50,6 +50,34 @@ public class CharacterDialog : MonoBehaviour
         SpeakerDialog.text = ActiveScript.dialogScript.script[ActiveScriptIndex].dialog;
         CameraTarget = ActiveScript.speakers[speakerIndex].gameObject;
 
+        DialogEvent dialogEvent = null;
+        foreach (var e in ActiveScript.dialogScript.events)
+        {
+            if (e.scriptIndex == ActiveScriptIndex)
+            {
+                dialogEvent = e;
+                break;
+            }
+        }
+        
+        if (dialogEvent != null)
+        {
+            DialogUnityEvent dialogUnityEvent = null;
+            foreach (var e in ActiveScript.DialogEvents)
+            {
+                if (e.dialogEventName == dialogEvent.eventName)
+                {
+                    dialogUnityEvent = e;
+                    break;
+                }
+            }
+
+            if (dialogUnityEvent != null && dialogUnityEvent.unityEvent != null)
+            {
+                dialogUnityEvent.unityEvent.Invoke();
+            }
+        }
+
         ActiveScriptIndex += 1;
 
         if (DebugHideUI)
@@ -105,10 +133,20 @@ public class CharacterDialog : MonoBehaviour
             CharacterDialogArrow.position = new Vector2(CharacterDialogArrow.position.x,
                 _characterDialogArrowStartingY + (Mathf.Sin(Time.time * CharacterDialogArrowSpeed) * CharacterDialogArrowDistance) + CharacterDialogArrowDistance / 2.0f);
 
-            if (Input.GetKeyDown(KeyCode.Return))
+            if (InputUtil.GetPrimaryActionDown())
             {
                 DisplayNextScriptLine();
             }
         }
+    }
+}
+
+class InputUtil
+{
+    public static bool GetPrimaryActionDown()
+    {
+        return Input.GetKeyDown(KeyCode.Return)
+                || Input.GetKeyDown(KeyCode.E)
+                || Input.GetKeyDown(KeyCode.F);
     }
 }
