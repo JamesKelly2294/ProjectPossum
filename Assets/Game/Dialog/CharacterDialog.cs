@@ -5,16 +5,34 @@ using UnityEngine;
 
 public class CharacterDialog : MonoBehaviour
 {
+    public static CharacterDialog Instance
+    {
+        get; private set;
+    }
+
     public FinalizedDialogScript ActiveScript;
     public int ActiveScriptIndex = 0;
 
-    public void BeginScript(FinalizedDialogScript script)
+    public bool BeginScript(FinalizedDialogScript script)
     {
+        if (ActiveScript)
+        {
+            return false;
+        }
+
         ActiveScript = script;
         ActiveScriptIndex = 0;
         CameraDialogFrame.SetActive(true);
 
+        ActiveScript.IsBeingPlayed = true;
+
+        if (ActiveScript.OnScriptBegan != null)
+        {
+            ActiveScript.OnScriptBegan.Invoke();
+        }
+
         DisplayNextScriptLine();
+        return true;
     }
 
     public void DisplayNextScriptLine ()
@@ -37,6 +55,13 @@ public class CharacterDialog : MonoBehaviour
 
     public void FinishScript()
     {
+        ActiveScript.IsBeingPlayed = false;
+        ActiveScript.CompletedOnce = true;
+        if (ActiveScript.OnScriptFinished != null)
+        {
+            ActiveScript.OnScriptFinished.Invoke();
+        }
+
         ActiveScript = null;
         ActiveScriptIndex = 0;
         CameraDialogFrame.SetActive(false);
@@ -55,8 +80,9 @@ public class CharacterDialog : MonoBehaviour
     public float CharacterDialogArrowDistance = -7.5f;
     private float _characterDialogArrowStartingY;
 
-    private void Start()
+    private void Awake()
     {
+        Instance = this;
         _characterDialogArrowStartingY = CharacterDialogArrow.position.y;
     }
 

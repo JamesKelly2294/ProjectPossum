@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a20412c1d6df25b4fa4a562fec2c4d69, type: 3}
+  m_Name: Intro
+  m_EditorClassIdentifier: 
+  script:
+  - speaker: 0
+    dialog: '*grumble grumble* Who''s there!? Oh, it''s you, the new intern!'
+  - speaker: 1
+    dialog: H-hi...
+  - speaker: 0
+    dialog: Your resume was *quite* impressive. I'm sure you'll be able to hit the
+      ground running.
+  - speaker: 1
+    dialog: Ah, y-yes... *nervous sweating*
+  - speaker: 0
+    dialog: After all, I'm not not paying you to dilly dally. Get to work! The farm
+      is out back.
+  - speaker: 1
+    dialog: O-of... of course! *internal screaming*
+  - speaker: 1
+    dialog: '*to self* Oh geez... I really shouldn''t have lied on my application.
+      I''m in way over my head.'

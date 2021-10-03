@@ -27,9 +27,15 @@ public class PlayerMovement : MonoBehaviour
     {
         isRunning = Input.GetKey(KeyCode.LeftShift);
 
-        // Input   
-        _movement.x = Input.GetAxisRaw("Horizontal");
-        _movement.y = Input.GetAxisRaw("Vertical");
+        if (CharacterDialog.Instance.ActiveScript != null)
+        {
+            _movement = Vector2.zero;
+        } else
+        {
+            // Input   
+            _movement.x = Input.GetAxisRaw("Horizontal");
+            _movement.y = Input.GetAxisRaw("Vertical");
+        }
 
         _movement = Vector2.ClampMagnitude(_movement, 1.0f);
 

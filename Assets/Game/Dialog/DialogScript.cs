@@ -13,5 +13,6 @@ public class DialogSpeaker
 [CreateAssetMenu(fileName = "Dialog", menuName = "Character Interactions/DialogScript", order = 1)]
 public class DialogScript : ScriptableObject
 {
+    public string title;
     public List<DialogSpeaker> script;
 }
