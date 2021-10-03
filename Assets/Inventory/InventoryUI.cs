@@ -6,8 +6,6 @@ using UnityEngine.UI;
 
 public class InventoryUI : MonoBehaviour
 {
-    public bool ObjectiveIsVisible;
-
     private bool isHidden;
 
     // Start is called before the first frame update
@@ -22,13 +20,6 @@ public class InventoryUI : MonoBehaviour
     {
         if(Input.GetKeyDown(KeyCode.I))
         {
-            if (ObjectiveIsVisible)
-            {
-                var transform = gameObject.GetComponent<RectTransform>();
-                transform.offsetMax = new Vector2(transform.offsetMax.x, -120.0f);
-                //transform.ForceUpdateRectTransforms();
-            }
-
             ToggleInventory();
         }
     }
