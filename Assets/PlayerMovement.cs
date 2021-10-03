@@ -53,9 +53,7 @@ public class PlayerMovement : MonoBehaviour
         // Movement
         rb.MovePosition(rb.position + (_movement * (isRunning ? runSpeed : walkSpeed) * Time.fixedDeltaTime));
         distanceSinceLastFootstep += (Vector2.Distance(_prevPosition, rb.position));
-
-        Debug.Log("distanceSinceLastFootstep = " + distanceSinceLastFootstep);
-
+        
         if (isRunning && distanceSinceLastFootstep > footstepThreshhold)
         {
             AudioManager.Instance.Play("Player/Walk", false, 0.7f, 1.35f, 0.25f, 0.3f);

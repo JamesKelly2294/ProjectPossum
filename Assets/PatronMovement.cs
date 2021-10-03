@@ -22,6 +22,11 @@ public class PatronMovement : MonoBehaviour
         _animators = GetComponentsInChildren<Animator>();
     }
 
+    private void OnMouseDown()
+    {
+        Debug.Log("Clicked!");
+    }
+
     void Update()
     {
         if (followingPath)
@@ -30,8 +35,6 @@ public class PatronMovement : MonoBehaviour
             Vector2 origin = transform.position;
             if (Vector2.Distance(destination, origin) < 0.1)
             {
-                Debug.Log("reached destination!");
-
                 if (movingForward)
                 {
                     pathIndex += 1;
