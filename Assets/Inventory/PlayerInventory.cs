@@ -9,15 +9,6 @@ public class InventoryItem: MonoBehaviour
 
     public BaseItem Item { get; set; }
     public int Quantity { get; set; }
-
-    public void HandleClick(PubSubListenerEvent e)
-    {
-        if (Item.IsSelectable())
-        {
-            var view = e.sender.GetComponent<InventoryItemUI>();
-            view.ToggleSelection();
-        }
-    }
 }
 
 /**

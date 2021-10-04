@@ -17,7 +17,7 @@ public class InventoryItemUI : MonoBehaviour
 
     private bool isSelected = false;
 
-    public static string ItemClickedKey = "InventoryItem.Clicked";
+    public static string ItemClickedKey = "inventory-item.clicked";
 
     private Sprite InventoryIcon
     {
@@ -59,18 +59,11 @@ public class InventoryItemUI : MonoBehaviour
     public void ShowSelected()
     {
         ImageView.color = SelectedItemColor;
-
-        var inventoryUI = gameObject.transform.parent.GetComponent<InventoryUI>();
-        if (!inventoryUI) { return; }
-        inventoryUI.Selected = this;
     }
 
     public void ShowUnselected()
     {
         ImageView.color = NormalItemColor;
-
-        var inventoryUI = gameObject.transform.parent.GetComponent<InventoryUI>();
-        inventoryUI.Selected = null;
     }
 
     public void RefreshUI()

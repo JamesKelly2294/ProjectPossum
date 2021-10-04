@@ -26,7 +26,7 @@ public class InventoryUI : MonoBehaviour
     private bool isHidden;
 
     public static string ItemUsedKey = "inventory.used";
-    public static string ItemDroppedKey = "inventory.dropped";
+    public static string ItemSelectionChangedKey = "inventory.selection-changed";
 
     public IEnumerable<InventoryItemUI> ItemViews
     {
@@ -41,14 +41,9 @@ public class InventoryUI : MonoBehaviour
     void Start()
     {
         HideInventory();
-        isHidden = true;
 
         UseButton.onClick.AddListener(() => {
             EventSender.Publish(ItemUsedKey, Selected);
-        });
-
-        DropButton.onClick.AddListener(() => {
-            EventSender.Publish(ItemDroppedKey, Selected);
         });
     }
 
@@ -104,22 +99,59 @@ public class InventoryUI : MonoBehaviour
 
     public void OnDrop()
     {
-
+        // no-op
     }
 
     public void HandleItemSelected(PubSubListenerEvent e)
     {
-        
+        var candidate = (InventoryItem)e.value;
+        if (!candidate || !candidate.Item.IsSelectable()) { return; }
+        foreach (InventoryItemUI subview in ItemViews)
+        {
+            if(subview.InventoryItem == candidate)
+            {
+                Selected = subview;
+                subview.ShowSelected();
+            }
+            else
+            {
+                subview.ShowUnselected();
+            }
+        }
     }
 
     public void HandleItemDeselected(PubSubListenerEvent e)
     {
-
+        var candidate = (InventoryItem)e.value;
+        if(!candidate || !candidate.Item.IsSelectable()) { return; }
+        if(candidate == Selected.InventoryItem)
+        {
+            Selected.ShowUnselected();
+            Selected = null;
+        }
     }
 
-    public void HandleItemDropped(PubSubListenerEvent e)
+    public void HandleItemSelectionToggled(PubSubListenerEvent e)
     {
+        var candidate = (InventoryItem)e.value;
+        if(!candidate || !candidate.Item.IsSelectable()) { return; }
+        if(Selected && candidate == Selected.InventoryItem)
+        {
+            HandleItemDeselected(e);
+        }
+        else
+        {
+            HandleItemSelected(e);
+        }
+    }
 
+    public void HandleInventoryItemClicked(PubSubListenerEvent e)
+    {
+        var candidate = (InventoryItem)e.value;
+        if (candidate && candidate.Item.IsSelectable())
+        {
+            EventSender.Publish(ItemSelectionChangedKey, candidate);
+        }
     }
 
     public void HandleItemUsed(PubSubListenerEvent e)
@@ -170,6 +202,9 @@ public class InventoryUI : MonoBehaviour
     }
 
     
+    /**
+     * This is here to support debug/editor based addition of stuff, fire an event or call HandleItemAdded() instead.
+     */
     public void SpawnInventoryItem()
     {
         var assetId = AssetDatabase.FindAssets("crops_275").FirstOrDefault();

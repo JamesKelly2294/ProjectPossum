@@ -5,6 +5,7 @@ using UnityEngine;
 public abstract class BaseItem : MonoBehaviour
 {
     public Sprite InventoryIcon;
+    public string ItemName;
 
     public virtual bool IsUsable() { return true; }
     public virtual void UseItem() { return; }
