@@ -31,15 +31,13 @@ public class InventoryItemUI : MonoBehaviour
     {
         get
         {
-            return "x" + InventoryItem.Quantity.ToString();
+            return $"x{InventoryItem.Quantity}";
         }
     }
 
     public void Start()
     {
-        ImageView.color = NormalItemColor;
-        TextView.text = InventoryText;
-        ButtonView.image.sprite = InventoryIcon;
+        RefreshUI();
         ButtonView.onClick.AddListener(() => {
             EventSender.Publish(ItemClickedKey, InventoryItem);
         });
@@ -73,5 +71,18 @@ public class InventoryItemUI : MonoBehaviour
 
         var inventoryUI = gameObject.transform.parent.GetComponent<InventoryUI>();
         inventoryUI.Selected = null;
+    }
+
+    public void RefreshUI()
+    {
+        if(!InventoryItem)
+        {
+            Debug.Log("Unable to refresh UI due to missing InventoryItem, aborting");
+            return;
+        }
+
+        ImageView.color = NormalItemColor;
+        TextView.text = InventoryText;
+        ButtonView.image.sprite = InventoryIcon;
     }
 }

@@ -8,7 +8,9 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 7293792267153614331}
+  - component: {fileID: 8409860732061003853}
+  - component: {fileID: 5518623494765931820}
+  - component: {fileID: 1326169281160168599}
   m_Layer: 0
   m_Name: InventoryItemUIPrefab
   m_TagString: Untagged
@@ -16,8 +18,8 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &7293792267153614331
-Transform:
+--- !u!224 &8409860732061003853
+RectTransform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -31,6 +33,42 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 24, y: -24}
+  m_SizeDelta: {x: 48, y: 48}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &5518623494765931820
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1991407997905216195}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f52b03bb040060140ba733cf999a7f01, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  InventoryItem: {fileID: 0}
+  SelectedItemColor: {r: 0.9150943, g: 0.8310707, b: 0.70358664, a: 0}
+  NormalItemColor: {r: 0.6509804, g: 0.5372549, b: 0.3647059, a: 0}
+  ImageView: {fileID: 8647929050018811587}
+  ButtonView: {fileID: 3101252088577062426}
+  TextView: {fileID: 7710361186113227066}
+  EventSender: {fileID: 1326169281160168599}
+--- !u!114 &1326169281160168599
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1991407997905216195}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f292d19e8ac687f4796ed88f9f22cd01, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &3007195502906102274
 GameObject:
   m_ObjectHideFlags: 0
@@ -252,8 +290,6 @@ GameObject:
   - component: {fileID: 6690579390439665097}
   - component: {fileID: 6308878097738696758}
   - component: {fileID: 3101252088577062426}
-  - component: {fileID: 3047284728525427241}
-  - component: {fileID: 535141182210189693}
   m_Layer: 5
   m_Name: Button
   m_TagString: Untagged
@@ -274,12 +310,12 @@ RectTransform:
   m_Children:
   - {fileID: 2816136830457216344}
   - {fileID: 7806004869638183501}
-  m_Father: {fileID: 7293792267153614331}
+  m_Father: {fileID: 8409860732061003853}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 54, y: 53}
+  m_AnchorMin: {x: 1, y: 1}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: -24, y: -24}
   m_SizeDelta: {x: 48, y: 48}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6690579390439665097
@@ -364,33 +400,3 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &3047284728525427241
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8069425698617259286}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f52b03bb040060140ba733cf999a7f01, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Item: {fileID: 0}
-  SelectedItemColor: {r: 0.9150943, g: 0.8310707, b: 0.70358664, a: 0}
-  NormalItemColor: {r: 0.6509804, g: 0.5372549, b: 0.3647059, a: 0}
-  ImageView: {fileID: 8647929050018811587}
-  ButtonView: {fileID: 3101252088577062426}
-  EventSender: {fileID: 0}
---- !u!114 &535141182210189693
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8069425698617259286}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f292d19e8ac687f4796ed88f9f22cd01, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 

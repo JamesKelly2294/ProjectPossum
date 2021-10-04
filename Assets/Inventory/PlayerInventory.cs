@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class InventoryItem: MonoBehaviour
 {
-    public PubSubSender sender;
+    public PubSubSender Sender;
 
     public BaseItem Item { get; set; }
     public int Quantity { get; set; }
@@ -31,17 +31,13 @@ public class PlayerInventory : MonoBehaviour
 {
     public IEnumerable<InventoryItem> Items;
     
-    public int UsableInventorySlots = 18;
+    public int UsableInventorySlots = 8;
 
-    public InventoryUI View;
-
-    public PubSubManager eventManager;
     public PubSubListener listener;
 
     public void Start()
     {
         if (Items == null) { Items = new List<InventoryItem>(); }
-        //if (selectedItemIndices == null) { selectedItemIndices = new List<int>(); } 
     }
 
     public void Update()
@@ -49,28 +45,15 @@ public class PlayerInventory : MonoBehaviour
         
     }
 
-    public void SelectItems(IEnumerable<int> atInventoryIndex)
+    public void HandleItemUsed(string key, GameObject sender, object value)
     {
-        throw new NotImplementedException();
-    }
+        var senderView = sender.GetComponent<InventoryUI>();
+        var itemUsed = (InventoryItem)value;
 
-    public void DeselectItems(IEnumerable<int> atInventoryIndex)
-    {
-        throw new NotImplementedException();
-    }
-
-    public void HighlightItem(int atInventoryIndex, Color suggestedHighlightColor)
-    {
-        throw new NotImplementedException();
-    }
-
-    public void UnhighlightItem(int atInventoryIndex)
-    {
-        throw new NotImplementedException();
-    }
-
-    private IEnumerable<int> FindItemIndices(BaseItem item)
-    {
-        throw new NotImplementedException();
+        if(itemUsed.Item.IsUsable())
+        {
+            itemUsed.Quantity -= 1;
+            itemUsed.Item.UseItem();
+        }
     }
 }
