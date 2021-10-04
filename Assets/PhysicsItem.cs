@@ -27,6 +27,7 @@ public class PhysicsItem : MonoBehaviour
 
         if (magsqr < (AcquiredDistance * AcquiredDistance))
         {
+            AudioManager.Instance.Play("SFX/Item/PickUp", false, 0.6f, 1.0f, 0.1f, 0.25f);
             gameObject.SetActive(false);
             //Destroy(gameObject);
             return;
@@ -34,10 +35,5 @@ public class PhysicsItem : MonoBehaviour
 
         float curSpeed = (1.0f / offset.sqrMagnitude) * AttractionStrength;
         Rigidbody2D.MovePosition(Rigidbody2D.position + new Vector2(offset.normalized.x, offset.normalized.y) * curSpeed * Time.deltaTime);
-
-        //if (magsqr > 0.0001f)
-        //{
-        //    Rigidbody2D.AddForce(AttractionStrength * offset.normalized / magsqr, ForceMode2D.Force);
-        //}
     }
 }
