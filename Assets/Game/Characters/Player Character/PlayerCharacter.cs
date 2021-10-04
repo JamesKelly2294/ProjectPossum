@@ -97,9 +97,7 @@ public class PlayerCharacter : Character
             Vector2Int MouseTileCoordinate = results.Item1;
             HighlightedTileCoordinate = MouseTileCoordinate;
             TileHighlightInRange = inRange;
-
-            Debug.Log(MouseTileCoordinate);
-
+            
             if (inRange && SoilManager.Instance.CropCoordinateIsValid(HighlightedTileCoordinate))
             {
                 TileHighlight.transform.position = new Vector3(HighlightedTileCoordinate.x, HighlightedTileCoordinate.y, TileHighlight.transform.position.z);
