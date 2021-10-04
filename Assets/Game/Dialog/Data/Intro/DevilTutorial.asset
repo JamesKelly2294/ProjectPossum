@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a20412c1d6df25b4fa4a562fec2c4d69, type: 3}
+  m_Name: DevilTutorial
+  m_EditorClassIdentifier: 
+  title: 
+  events: []
+  script:
+  - speaker: 0
+    dialog: Hey bro, I missed you.
+  - speaker: 0
+    dialog: ...
+  - speaker: 1
+    dialog: ...
+  - speaker: 0
+    dialog: ...
+  - speaker: 1
+    dialog: So about that <color=yellow>Golden Rod Salve</color>. It's actually pretty
+      easy to make. You just need <color=yellow>4 <sprite name="crop_grown_yellow"></color>
+      and <color=yellow>1 <sprite name="crop_grown_purple"></color>.
+  - speaker: 1
+    dialog: Now, obviously you don't have <color=yellow>4 <sprite name="crop_grown_yellow"></color>
+      and <color=yellow>1 <sprite name="crop_grown_purple"></color>. But you *do*
+      have <color=yellow>4 <sprite name="crop_seed_bag_yellow"></color> and <color=yellow>1
+      <sprite name="crop_seed_bag_purple"></color>. Kinda neat how that worked out,
+      eh?

@@ -44,6 +44,7 @@ public class Crop : MonoBehaviour
     public List<Sprite> GrowthSprites;
     public Sprite GrownSprite;
     public Sprite InventoryIcon;
+    public SpriteRenderer BlipSprite;
     public SpriteRenderer SpriteRenderer;
 
 

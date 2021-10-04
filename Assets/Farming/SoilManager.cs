@@ -77,6 +77,8 @@ public class SoilManager : MonoBehaviour, ICropDelegate
 
         _crops[coordinate] = crop;
 
+        AudioManager.Instance.Play("SFX/PlantCrop", false, 0.8f, 1.2f, 0.5f, 0.6f);
+
         return true;
     }
     

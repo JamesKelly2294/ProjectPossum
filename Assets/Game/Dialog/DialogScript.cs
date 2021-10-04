@@ -19,7 +19,7 @@ public class DialogEvent
 }
 
 
-[CreateAssetMenu(fileName = "Dialog", menuName = "Character Interactions/DialogScript", order = 1)]
+[CreateAssetMenu(fileName = "DialogScript", menuName = "Gameplay/DialogScript", order = 1)]
 public class DialogScript : ScriptableObject
 {
     public string title;
