@@ -145,7 +145,12 @@ MonoBehaviour:
   GrowthPerSecond: 1
   GrowthRequiredTotal: 30
   GrowthRequiredForSprouting: 5
+  CropType: 0
+  BoostedGrowthFromAdjacentCropTypes: 02000000
+  HinderedGrowthFromAdjacentCropTypes: 0100000003000000
   CurrentGrowth: 0
+  BoostingNeighbors: 0
+  HinderingNeighbors: 0
   State: 0
   Coordinate: {x: 0, y: 0}
   SeedlingSprite: {fileID: -4655911834489764586, guid: ee0eb7872cb39dc488fa1e510fc75fd0, type: 3}
@@ -155,7 +160,12 @@ MonoBehaviour:
   - {fileID: 3554586372420520446, guid: ee0eb7872cb39dc488fa1e510fc75fd0, type: 3}
   GrownSprite: {fileID: -6921886056383445842, guid: ee0eb7872cb39dc488fa1e510fc75fd0, type: 3}
   InventoryIcon: {fileID: 4822365402411934597, guid: ee0eb7872cb39dc488fa1e510fc75fd0, type: 3}
-  BlipSprite: {fileID: 269194202049969674}
+  BlipSprites:
+  - {fileID: 21300000, guid: f90f9327709a98744beec4acb5eb6a6c, type: 3}
+  - {fileID: 21300000, guid: 94e514122ab0c2944baf4e165c3659c4, type: 3}
+  - {fileID: 21300000, guid: 62101c685177d994088beb61ed0827a5, type: 3}
+  - {fileID: 21300000, guid: c8ccf4fb6b6f6794baadebe378375fe8, type: 3}
+  BlipRenderer: {fileID: 269194202049969674}
   SpriteRenderer: {fileID: 299829288203356927}
 --- !u!1 &3402691245032434637
 GameObject:

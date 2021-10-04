@@ -55,6 +55,18 @@ public class SoilManager : MonoBehaviour, ICropDelegate
         return false;
     }
 
+    public Crop GetCrop(Vector2Int coordinate)
+    {
+        if (_crops.ContainsKey(coordinate))
+        {
+            return _crops[coordinate];
+        }
+        else
+        {
+            return null;
+        }
+    }
+
     public bool PlantCropAtCoordinate(CropType cropType, Vector2Int coordinate)
     {
         if (!CropCoordinateIsValid(coordinate))
@@ -100,4 +112,18 @@ public class SoilManager : MonoBehaviour, ICropDelegate
     {
         Debug.Log(crop + " finished growing!");
     }
+
+    public void CropDidBeginGrowing(Crop crop)
+    {
+        Debug.Log(crop + " began growing!");
+
+        foreach (var coord in crop.AdjacentTiles())
+        {
+            if (_crops.ContainsKey(coord))
+            {
+                _crops[coord].CalculateAdjacenyBonus();
+            }
+        }
+    }
 }
+
