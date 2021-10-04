@@ -14,7 +14,9 @@ public class InventoryUIEditor : Editor
         InventoryUI invUI = (InventoryUI)target;
         if (GUILayout.Button("Create InventoryItem") && Application.isPlaying)
         {
+#if UNITY_EDITOR
             invUI.SpawnInventoryItem();
+#endif
         }
     }
 }

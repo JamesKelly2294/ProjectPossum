@@ -207,6 +207,7 @@ public class InventoryUI : MonoBehaviour
      */
     public void SpawnInventoryItem()
     {
+#if UNITY_EDITOR
         var assetId = AssetDatabase.FindAssets("crops_275").FirstOrDefault();
         if (assetId == null || assetId == String.Empty) { return; }
 
@@ -239,6 +240,7 @@ public class InventoryUI : MonoBehaviour
 
         var e = new PubSubListenerEvent("inventory.debug", gameObject, inventoryItem);
         HandleItemAdded(e);
+#endif
     }
 
     public void RefreshUI()
