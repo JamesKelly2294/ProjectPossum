@@ -46,14 +46,24 @@ MonoBehaviour:
   FarmPlots:
   - serializedVersion: 2
     x: -2
-    y: 16
+    y: 15
     width: 8
-    height: 11
+    height: 4
   - serializedVersion: 2
     x: 10
-    y: 16
+    y: 22
     width: 8
-    height: 11
+    height: 4
+  - serializedVersion: 2
+    x: -2
+    y: 22
+    width: 8
+    height: 4
+  - serializedVersion: 2
+    x: 10
+    y: 15
+    width: 8
+    height: 4
   CropPrefabs:
   - type: 0
     prefab: {fileID: 299829288858792918, guid: 3a751f7bb30ef9f42b323f88ab442ddd, type: 3}
