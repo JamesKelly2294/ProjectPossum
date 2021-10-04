@@ -59,18 +59,22 @@ public class PatronManager : MonoBehaviour
 
         _patrons = new List<PatronCharacter>();
         _apothecaryQueuePatrons = new PatronCharacter[ApothecaryQueue.transform.childCount];
+
+        PatronSpawnTimer -= PatronSpawnInitialDelay;
     }
 
+    [Range(0.0f, 240.0f)]
+    public float PatronSpawnInitialDelay = 30.0f;
     [Range (0.0f, 240.0f)]
     public float PatronSpawnInterval = 30.0f;
-    float timer;
+    public float PatronSpawnTimer;
     void Update()
     {
-        timer += Time.deltaTime;
+        PatronSpawnTimer += Time.deltaTime;
 
-        if (timer > PatronSpawnInterval)
+        if (PatronSpawnTimer > PatronSpawnInterval)
         {
-            timer -= PatronSpawnInterval;
+            PatronSpawnTimer -= PatronSpawnInterval;
             SpawnPatron();
         }
     }

@@ -117,6 +117,7 @@ public class PatronCharacter : Character
         transform.position = PatronMovement.path[0].position;
     }
 
+    private static bool _test = false;
     public void TryQueuingInApothecaryQueue()
     {
         int nextAvailableSpot = PatronManager.Instance.NextAvailableApothecarySpotForPatron();
@@ -139,6 +140,11 @@ public class PatronCharacter : Character
             path.Add(PatronManager.Instance.ApothecaryTurnaround.GetAllChildren()[0]);
             path.Add(PatronManager.Instance.ApothecaryQueue.GetAllChildren()[nextAvailableSpot]);
             PatronManager.Instance.ReserveApothecarySpotForPatron(nextAvailableSpot, this);
+
+            if (!_test)
+            {
+                FindObjectOfType<ReputationBars>().ShowPatronReputationBar();
+            }
         }
 
 
