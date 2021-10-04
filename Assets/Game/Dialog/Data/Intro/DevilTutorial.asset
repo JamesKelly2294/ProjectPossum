@@ -17,17 +17,17 @@ MonoBehaviour:
   script:
   - speaker: 0
     dialog: Hey bro, I missed you.
-  - speaker: 0
-    dialog: ...
   - speaker: 1
     dialog: ...
   - speaker: 0
     dialog: ...
   - speaker: 1
+    dialog: ...
+  - speaker: 0
     dialog: So about that <color=yellow>Golden Rod Salve</color>. It's actually pretty
       easy to make. You just need <color=yellow>4 <sprite name="crop_grown_yellow"></color>
       and <color=yellow>1 <sprite name="crop_grown_purple"></color>.
-  - speaker: 1
+  - speaker: 0
     dialog: Now, obviously you don't have <color=yellow>4 <sprite name="crop_grown_yellow"></color>
       and <color=yellow>1 <sprite name="crop_grown_purple"></color>. But you *do*
       have <color=yellow>4 <sprite name="crop_seed_bag_yellow"></color> and <color=yellow>1
