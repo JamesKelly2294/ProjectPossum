@@ -58,23 +58,23 @@ public class InventoryItemUI : MonoBehaviour
 
     public void ShowSelected()
     {
-        ImageView.color = SelectedItemColor;
+        ButtonView.image.color = SelectedItemColor;
     }
 
     public void ShowUnselected()
     {
-        ImageView.color = NormalItemColor;
+        ButtonView.image.color = NormalItemColor;
     }
 
     public void RefreshUI()
     {
         if(!InventoryItem)
         {
-            Debug.Log("Unable to refresh UI due to missing InventoryItem, aborting");
+            Debug.Log("Unable to refresh InventoryItemUI due to missing InventoryItem!");
             return;
         }
 
-        ImageView.color = NormalItemColor;
+        ButtonView.image.color = NormalItemColor;
         TextView.text = InventoryText;
         ButtonView.image.sprite = InventoryIcon;
     }

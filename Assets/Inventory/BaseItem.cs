@@ -9,6 +9,7 @@ public abstract class BaseItem : MonoBehaviour
 
     public virtual bool IsUsable() { return true; }
     public virtual void UseItem() { return; }
+    public virtual bool IsItemConsumable() { return true; }
 
     public virtual bool IsSelectable() { return true; }
     public virtual void OnSelect() { return; }

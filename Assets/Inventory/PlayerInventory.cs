@@ -1,12 +1,11 @@
 using System;
+using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class InventoryItem: MonoBehaviour
 {
-    public PubSubSender Sender;
-
     public BaseItem Item { get; set; }
     public int Quantity { get; set; }
 }
@@ -20,15 +19,24 @@ public class InventoryItem: MonoBehaviour
  */
 public class PlayerInventory : MonoBehaviour
 {
-    public IEnumerable<InventoryItem> Items;
+    public IEnumerable<InventoryItem> InventoryItems;
     
     public int UsableInventorySlots = 8;
 
-    public PubSubListener listener;
+    public PubSubSender publisher;
+
+    public static string PlayerInventoryItemChanged = "inventory-item.changed";
+    public static string PlayerInventoryItemAdded = "inventory-item.added";
+    public static string PlayerInventoryItemRemoved = "inventory-item.removed";
+    
 
     public void Start()
     {
-        if (Items == null) { Items = new List<InventoryItem>(); }
+        if (InventoryItems == null) { InventoryItems = new List<InventoryItem>(); }
+        if (!publisher)
+        {
+            publisher = gameObject.AddComponent<PubSubSender>();
+        }
     }
 
     public void Update()
@@ -36,15 +44,64 @@ public class PlayerInventory : MonoBehaviour
         
     }
 
-    public void HandleItemUsed(string key, GameObject sender, object value)
+    public InventoryItem GetInventoryItemForBaseItem(BaseItem item)
     {
-        var senderView = sender.GetComponent<InventoryUI>();
-        var itemUsed = (InventoryItem)value;
+        var target = InventoryItems.Where(inventoryItem => inventoryItem.Item == item).FirstOrDefault();
+        return target;
+    }
 
-        if(itemUsed.Item.IsUsable())
+    public void AddItemToPlayerInventory(BaseItem newItem, int quantity = 1)
+    {
+        var go = new GameObject();
+        go.transform.parent = gameObject.transform;
+
+        var inventoryItem = go.AddComponent<InventoryItem>();
+        inventoryItem.Item = newItem;
+        inventoryItem.Quantity = quantity;
+
+        var smolList = new List<InventoryItem>();
+        smolList.Add(inventoryItem);
+        InventoryItems = InventoryItems.Concat(smolList);
+
+        publisher.Publish(PlayerInventoryItemAdded, inventoryItem);
+        return;
+    }
+
+    public void UpdateItemQuantity(BaseItem existingItem, int quantity)
+    {
+        var target = GetInventoryItemForBaseItem(existingItem);
+        if (!target) {
+            Debug.Log($"Can't update {existingItem.ItemName} because it isn't in the player's inventory");
+            return;
+        }
+
+        target.Quantity += quantity;
+        Debug.Log($"Updated ${existingItem.ItemName} quantity to ${target.Quantity}");
+
+        if (target.Quantity <= 0)
         {
-            itemUsed.Quantity -= 1;
-            itemUsed.Item.UseItem();
+            Debug.Log("Removing due to the item quantity falling below to or below zero");
+            RemoveItemFromPlayerInventory(existingItem);
+        }
+        else
+        {
+            publisher.Publish(PlayerInventoryItemChanged, target);
         }
     }
+
+    public void RemoveItemFromPlayerInventory(BaseItem item)
+    {
+        var target = GetInventoryItemForBaseItem(item);
+        if (!target)
+        {
+            Debug.Log($"Couldn't find item {item.ItemName} in inventory, skipping removal");
+            return;
+        }
+
+        publisher.Publish(PlayerInventoryItemRemoved, target);
+        InventoryItems = InventoryItems.Where(existing => existing.Item != item);
+        Destroy(target);
+        return;
+    }
+
 }

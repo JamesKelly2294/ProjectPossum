@@ -14,7 +14,6 @@ public class InventoryUI : MonoBehaviour
     public InventoryItemUI Selected;
 
     public Button UseButton;
-    public Button DropButton;
 
     public PubSubSender EventSender;
 
@@ -28,19 +27,14 @@ public class InventoryUI : MonoBehaviour
     public static string ItemUsedKey = "inventory.used";
     public static string ItemSelectionChangedKey = "inventory.selection-changed";
 
-    public IEnumerable<InventoryItemUI> ItemViews
-    {
-        get
-        {
-            var children = Grid.GetComponentsInChildren<InventoryItemUI>();
-            return children;
-        }
-    }
+    private IEnumerable<InventoryItemUI> ItemViews;
 
     // Start is called before the first frame update
-    void Start()
+    public void Start()
     {
+        ItemViews = new List<InventoryItemUI>();
         HideInventory();
+        UseButton.interactable = false;
 
         UseButton.onClick.AddListener(() => {
             EventSender.Publish(ItemUsedKey, Selected);
@@ -48,7 +42,7 @@ public class InventoryUI : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    public void Update()
     {
         if(Input.GetKeyDown(KeyCode.I))
         {
@@ -118,6 +112,11 @@ public class InventoryUI : MonoBehaviour
                 subview.ShowUnselected();
             }
         }
+
+        if(candidate.Item.IsUsable())
+        {
+            UseButton.interactable = true;
+        }
     }
 
     public void HandleItemDeselected(PubSubListenerEvent e)
@@ -129,6 +128,7 @@ public class InventoryUI : MonoBehaviour
             Selected.ShowUnselected();
             Selected = null;
         }
+        UseButton.interactable = false;
     }
 
     public void HandleItemSelectionToggled(PubSubListenerEvent e)
@@ -156,97 +156,110 @@ public class InventoryUI : MonoBehaviour
 
     public void HandleItemUsed(PubSubListenerEvent e)
     {
+        var itemUsed = (InventoryItem)e.value;
+        if(!itemUsed) { return; }
 
+        if (itemUsed.Item.IsUsable())
+        {
+            itemUsed.Item.UseItem();
+        }
+
+        if (itemUsed.Item.IsItemConsumable())
+        {
+            Inventory.UpdateItemQuantity(itemUsed.Item, -1);
+        }
+
+        RefreshUI();
     }
 
     public void HandleItemAdded(PubSubListenerEvent e)
     {
-        var inventoryItem = (InventoryItem) e.value;
-        var matches = (from view in ItemViews
-                       where view.InventoryItem != null && view.InventoryItem.Item.name == inventoryItem.Item.name
-                       select view).Count();
-        if (matches > 0) {
-            Debug.Log($"{inventoryItem.name} UI item already exists, incrementing instead");
-            inventoryItem.Quantity += 1;
-            RefreshUI();
-            return;
-        }
+        var inventoryItem = (InventoryItem)e.value;
 
         var inventoryItemUIPrefab = Instantiate(InventoryItemUIPrefab, Grid.transform);
         inventoryItemUIPrefab.SetActive(false);
-        inventoryItemUIPrefab.name = "Inventory UI Prefab (" + inventoryItem.name + ")";
+        inventoryItemUIPrefab.name = $"Inventory UI Prefab {inventoryItem.Item.ItemName}";
 
         var inventoryItemUI = inventoryItemUIPrefab.GetComponentInChildren<InventoryItemUI>();
         inventoryItemUI.InventoryItem = inventoryItem;
         inventoryItemUI.SelectedItemColor = SelectedItemColor;
         inventoryItemUI.NormalItemColor = UnselectedItemColor;
 
+        var concatList = new List<InventoryItemUI>();
+        concatList.Add(inventoryItemUI);
+        ItemViews = ItemViews.Concat(concatList);
+
         inventoryItemUIPrefab.SetActive(true);
+        //RefreshUI();
     }
 
     public void HandleItemRemoved(PubSubListenerEvent e)
     {
-        var item = (InventoryItem)e.value;
-
-        item.Quantity -= 1;
-        if(item.Quantity > 0) { return; }
-
-        var matches = (from view in ItemViews
-                       where view.InventoryItem.name == item.name
-                       select view);
-        var target = matches.FirstOrDefault();
+        var inventoryItem = (InventoryItem)e.value;
+        var target = ItemViews.Where(subview => subview.InventoryItem == inventoryItem).FirstOrDefault();
         if(target)
         {
-            Destroy(target);
+            if (Selected == target) { Selected = null; }
+            ItemViews = ItemViews.Where(subview => subview != target);
+
+            Debug.Log($"Deleting {target.name}");
+            Destroy(target.gameObject);
+            RefreshUI();
         }
     }
 
-    
-    /**
-     * This is here to support debug/editor based addition of stuff, fire an event or call HandleItemAdded() instead.
-     */
-    public void SpawnInventoryItem()
+    public void HandleItemChanged(PubSubListenerEvent e)
     {
-#if UNITY_EDITOR
-        var assetId = AssetDatabase.FindAssets("crops_275").FirstOrDefault();
-        if (assetId == null || assetId == String.Empty) { return; }
-
-        var path = AssetDatabase.GUIDToAssetPath(assetId);
-        if (path == null || path == String.Empty) { return; }
-
-        var sprite = AssetDatabase.LoadAssetAtPath<Sprite>(path);
-        if (sprite == null) { return; }
-
-        Debug.Log("Loaded sprite at " + path);
-
-        var itemGO = GameObject.Find("Debug Item");
-        if (!itemGO) { itemGO = new GameObject("Debug Item"); }
-        var item = itemGO.GetComponent<Seed>();
-        if (!item) { item = itemGO.AddComponent<Seed>(); }
-        item.InventoryIcon = sprite;
-        itemGO.transform.parent = Inventory.transform;
-
-        var inventoryItemGO = GameObject.Find("Debug Inventory Item");
-        if (inventoryItemGO == null) { inventoryItemGO = new GameObject("Debug Inventory Item"); }
-
-        var inventoryItem = inventoryItemGO.GetComponent<InventoryItem>();
-        if (inventoryItem == null) {
-            inventoryItem = inventoryItemGO.AddComponent<InventoryItem>();
-            inventoryItem.Quantity = 1;
-        }
-        inventoryItem.Item = item;
-        if (!inventoryItem.Sender) { inventoryItem.Sender = inventoryItemGO.AddComponent<PubSubSender>(); }
-        inventoryItemGO.transform.parent = Inventory.transform;
-
-        var e = new PubSubListenerEvent("inventory.debug", gameObject, inventoryItem);
-        HandleItemAdded(e);
-#endif
+        RefreshUI();
     }
 
     public void RefreshUI()
     {
         foreach(var subview in ItemViews) {
-            subview.RefreshUI();
+            if(!subview.InventoryItem)
+            {
+                Destroy(subview);
+            }
+            else
+            {
+                subview.RefreshUI();
+            }
         }
+    }
+
+    /**
+     * This is here to support debug/editor based addition of stuff, fire an event or call AddItemToPlayerInventory() instead.
+     */
+    public void DebugSpawnItemFromLibrary()
+    {
+#if UNITY_EDITOR
+        var library = GameObject.Find("ItemLibrary");
+        if (!library)
+        {
+            Debug.Log("Unable to locate ItemLibrary, double check that the Prefab is present?");
+            return;
+        }
+
+        int itemIndex = this.ItemViews.Count() % Inventory.UsableInventorySlots;
+        var item = library.GetComponents<BaseItem>()[itemIndex];
+        if (!item)
+        {
+            Debug.Log("Something went wrong while looking for items from the library");
+            return;
+        }
+
+        Inventory.AddItemToPlayerInventory(item);
+#endif
+    }
+
+    public void DebugRemoveSelectedItem()
+    {
+#if UNITY_EDITOR
+        if(!Selected) {
+            Debug.Log("Nothing selected to remove!");
+            return;
+        }
+        Inventory.RemoveItemFromPlayerInventory(Selected.InventoryItem.Item);
+#endif
     }
 }
