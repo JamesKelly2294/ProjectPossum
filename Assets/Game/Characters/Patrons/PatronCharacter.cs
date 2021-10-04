@@ -86,7 +86,7 @@ public class PatronCharacter : Character
         }
         else if (CurrentState == PatronState.Queueing)
         {
-            PatronMovement.FaceDirection(PatronMovement.Direction.North);
+            PatronMovement.FaceDirection(Direction.North);
             CurrentState = PatronState.Queued;
         }
         else if (CurrentState == PatronState.Exiting)

@@ -2,6 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum Direction
+{
+    North,
+    East,
+    South,
+    West
+}
+
 [RequireComponent(typeof(PatronCharacter))]
 public class PatronMovement : MonoBehaviour
 {
@@ -18,14 +26,6 @@ public class PatronMovement : MonoBehaviour
 
     Vector2 _movement;
     PatronCharacter _patron;
-
-    public enum Direction
-    {
-        North,
-        East,
-        South,
-        West
-    }
 
     private void Start()
     {
@@ -137,7 +137,7 @@ public class PatronMovement : MonoBehaviour
         }
     }
 
-    public void FaceDirection(PatronMovement.Direction direction)
+    public void FaceDirection(Direction direction)
     {
         Vector2 facing;
         switch (direction)
